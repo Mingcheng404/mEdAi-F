@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI药物扫描识别系统</title>
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/tesseract.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="project.css">
+    <link rel="stylesheet" href="medication-scanner.css">
+</head>
+<body>
+    <div class="app-container">
+        <nav class="navbar">
+            <div class="container navbar-content">
+                <a href="function-select.html" class="back-btn" data-translate="back">
+                    <i class="fas fa-arrow-left"></i> 返回
+                </a>
+                <a href="#" class="brand">
+                    <i class="fas fa-pills"></i> MedAI
+                </a>
+                <div>
+                    <div class="language-switcher">
+                        <button class="lang-btn active" data-lang="zh" data-translate="chinese">中文</button>
+                        <button class="lang-btn" data-lang="en" data-translate="english">EN</button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+</body>
+<body>
+        <div class="scanner-container">
+            <div class="scanner-header">
+                <h1><i class="fas fa-camera"></i> AI藥物掃描識別系統</h1>
+                <p>拍攝或上傳藥物包裝照片，獲取詳細藥品信息</p>
+            </div>
+            
+            <div class="scanner-grid">
+                <!-- OCR掃描區 -->
+                <div class="scanner-section">
+                    <h2><i class="fas fa-camera"></i> 藥物盒掃描</h2>
+
+                    <div class="upload-area" id="dropArea">
+                        <i class="fas fa-cloud-upload-alt" style="font-size: 3rem; color: var(--neon-blue);"></i>
+                        <p>拖放藥物盒圖片到此區域或點擊上傳</p>
+                        <p class="file-info" id="fileInfo">尚未選擇文件</p>
+                    </div>
+                    
+                    <input type="file" id="fileInput" accept="image/*" style="display:none;">
+                    <label for="fileInput" class="file-input-label">選擇文件</label>
+                    <div class="preview-container" id="preview">
+                        <p style="color: var(--text-light);">圖片預覽區域</p>
+                    </div>
+                    
+                    <div class="controls">
+                        <div class="language-group">
+                            <label for="language"><i class="fas fa-language"></i> 辨識語言:</label>
+                            <select id="language">
+                                <option value="eng">English</option>
+                            </select>
+                        </div>
+                        
+                        <button id="scanBtn" class="scan-btn" disabled>
+                            <i class="fas fa-search"></i> 開始掃描
+                        </button>
+                    </div>
+                    
+                    <div class="progress-container" id="progress">
+                        <div class="progress-bar" id="progressBar"></div>
+                    </div>
+                    
+                    <div class="status info" id="status"></div>
+                    
+                    <h3><i class="fas fa-file-alt"></i> 掃描結果:</h3>
+                    <div class="result-container" id="result"></div>
+                </div>
+
+                <!-- AI藥物查詢區 -->
+                <div class="scanner-section">
+                    <h2><i class="fas fa-brain"></i> AI藥物識別</h2>
+
+                    <div class="ai-controls">
+                        <div class="ai-input-group">
+                            <label for="additionalInfo"><i class="fas fa-info-circle"></i> 補充信息:</label>
+                            <textarea id="additionalInfo" placeholder="請補充關於此藥物的任何信息（如使用方式、症狀等）"></textarea>
+                        </div>
+                        
+                        <div class="ai-submit-group">
+                            <button id="aiSubmitBtn" class="ai-submit-btn" disabled>
+                                <i class="fas fa-paper-plane"></i> 提交AI識別
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="ai-response-container">
+                        <div class="ai-header">
+                            <h3><i class="fas fa-flask"></i> AI分析結果</h3>
+                            <div class="response-loader" id="responseLoader">
+                                <div class="loader-dot"></div>
+                                <div class="loader-dot"></div>
+                                <div class="loader-dot"></div>
+                            </div>
+                        </div>
+                        <div class="ai-response" id="aiResponse">
+                            <p>掃描藥品後，AI將提供詳細分析結果...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tech-grid"></div>
+    </div>
+
+    <script src="medication-scanner.js"></script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedAI - AI藥物助手</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="project.css">
+</head>
+<body>
+    <div class="app-container">
+        <nav class="navbar">
+            <div class="container navbar-content">
+                <a href="#" class="brand">
+                    <i class="fas fa-pills"></i> MedAI
+                </a>
+                <div>
+                    <button class="back-btn" id="backBtn">
+                        <i class="fas fa-arrow-left"></i> 返回功能選擇
+                    </button>
+                    <div class="language-switcher">
+                        <button class="lang-btn active" data-lang="zh">中文</button>
+                        <button class="lang-btn" data-lang="en">EN</button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="container main-content">
+            <div class="app-title">
+                <h1>AI藥物助手</h1>
+                <p>描述您的症狀，獲取基於先進AI技術的個性化藥物建議</p>
+            </div>
+            
+            <div class="user-profile" id="userProfile">
+                <!-- 用戶資料將在這裡顯示 -->
+            </div>
+            
+            <div class="ai-container">
+                <div class="ai-header">
+                    <h2><i class="fas fa-robot"></i> 向我們的AI諮詢藥物信息</h2>
+                </div>
+                <div class="ai-body">
+                    <div class="input-group">
+                        <input type="text" id="userInput" class="form-control" placeholder="描述您的症狀或諮詢藥物信息..." value="我有頭痛和發燒">
+                        <button class="btn-primary" id="submitBtn">提交</button>
+                    </div>
+                    
+                    <div class="loader" id="loader">
+                        <div class="loader-dots">
+                            <div class="loader-dot"></div>
+                            <div class="loader-dot"></div>
+                            <div class="loader-dot"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="chat-container" id="chatContainer">
+                        <!-- 聊天消息將在這裡顯示 -->
+                        <div class="ai-message">
+                            <p>👋 您好！我是MedAI，您的智能藥物助手。我可以幫助您：</p>
+                            <ul>
+                                <li>根據症狀提供藥物建議</li>
+                                <li>提供劑量建議</li>
+                                <li>提供副作用信息</li>
+                                <li>檢查藥物相互作用</li>
+                            </ul>
+                            <p>請描述您的症狀或詢問有關藥物的問題。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="action-bar">
+                        <button class="btn-primary" id="newChatBtn">
+                            <i class="fas fa-plus"></i> 新對話
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedAI - 功能選擇</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="project.css">
+</head>
+<body>
+    <div class="app-container">
+        <nav class="navbar">
+            <div class="container navbar-content">
+                <a href="#" class="brand">
+                    <i class="fas fa-pills"></i> MedAI
+                </a>
+                    
+                    <div class="language-switcher">
+                        <button class="lang-btn active" data-lang="zh">中文</button>
+                        <button class="lang-btn" data-lang="en">EN</button>
+                    </div>
+            </div>
+        </nav>
+        <!-- 页面主要内容 -->
+        <div class="page-container">
+            <div class="page-logo">
+                <h1><i class="fas fa-th"></i> 功能選擇</h1>
+                <p>選擇您需要的服務</p>
+            </div>
+            
+            <div class="function-grid">
+                <div class="function-card" id="aiAssistant">
+                    <div class="card-icon">
+                        <i class="fas fa-comment-medical"></i>
+                    </div>
+                    <h3>AI藥物助手</h3>
+                    <p>描述症狀獲取個性化藥物建議</p>
+                </div>
+                
+                <div class="function-card" id="medicationReminder">
+                    <div class="card-icon">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <h3>用藥提醒</h3>
+                    <p>設置和管理您的用藥計劃</p>
+                </div>
+                
+                <div class="function-card" id="medicationScanner">
+                    <div class="card-icon">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <h3>AI藥物掃描器</h3>
+                    <p>掃描藥物盒獲取藥物信息</p>
+                </div>
+            </div>
+        </div>
+        <div class="tech-grid"></div>
+    </div>
+    
+    <script src="function-select.js"></script>
+</body>
+</html>

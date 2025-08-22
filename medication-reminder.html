@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh" id="main-html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedAI - 用藥提醒</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="project.css">
+</head>
+<body>
+    <div class="app-container">
+        <nav class="navbar">
+            <div class="container navbar-content">
+                <a href="function-select.html" class="back-btn" data-translate="back">
+                    <i class="fas fa-arrow-left"></i> 返回
+                </a>
+                <a href="#" class="brand">
+                    <i class="fas fa-pills"></i> MedAI
+                </a>
+                <div>
+                    <div class="language-switcher">
+                        <button class="lang-btn active" data-lang="zh" data-translate="chinese">中文</button>
+                        <button class="lang-btn" data-lang="en" data-translate="english">EN</button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- 用药提醒页面主要内容 -->
+        <div class="page-container">
+            <div class="page-logo">
+                <h1><i class="fas fa-bell"></i> <span data-translate="medication_reminder">用藥提醒</span></h1>
+                <p data-translate="set_medication_plan">設置您的用藥計劃</p>
+            </div>
+            
+            <div class="reminder-container">
+                <div class="reminder-card">
+                    <h2><i class="fas fa-capsules"></i> <span data-translate="medication_settings">用藥設置</span></h2>
+                    
+                    <div class="reminder-form">
+                        <div class="form-group">
+                            <label for="medication-name" data-translate="medication_name_optional">藥物名稱（可選）</label>
+                            <input type="text" id="medication-name" placeholder="例如：阿司匹林">
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="doses-per-day" data-translate="doses_per_day">每日用藥次數</label>
+                                <select id="doses-per-day">
+                                    <option value="1">1 <span data-translate="times"></span></option>
+                                    <option value="2">2 <span data-translate="times"></span></option>
+                                    <option value="3" >3 <span data-translate="times"></span></option>
+                                    <option value="4">4 <span data-translate="times"></span></option>
+                                    <option value="5">5 <span data-translate="times"></span></option>
+                                    <option value="6">6 <span data-translate="times"></span></option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="dose-interval" data-translate="dose_interval">用藥間隔</label>
+                                <select id="dose-interval">
+                                    <option value="0.00277778">10 <span data-translate="seconds">秒</span>（<span data-translate="test">測試</span>）</option>
+                                    <option value="1">1 <span data-translate="hour">小時</span></option>
+                                    <option value="2">2 <span data-translate="hours">小時</span></option>
+                                    <option value="3">3 <span data-translate="hours">小時</span></option>
+                                    <option value="4">4 <span data-translate="hours">小時</span></option>
+                                    <option value="6">6 <span data-translate="hours">小時</span></option>
+                                    <option value="8">8 <span data-translate="hours">小時</span></option>
+                                    <option value="12">12 <span data-translate="hours">小時</span></option>
+                                    <option value="24">24 <span data-translate="hours">小時</span></option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="start-time" data-translate="start_time">開始時間</label>
+                            <input type="time" id="start-time" value="08:00">
+                        </div>
+                        
+                        <button id="start-reminder" class="btn btn-lg">
+                            <i class="fas fa-play-circle"></i> <span data-translate="start_medication_reminder">開始用藥提醒</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="reminder-card" id="reminder-display" style="display: none;">
+                    <h2><i class="fas fa-clock"></i> <span data-translate="medication_reminder_status">用药提醒状态</span></h2>
+                    
+                    <div class="medication-info">
+                        <span id="current-med-name" data-translate="unspecified_medication">未指定藥物</span>
+                    </div>
+                    
+                    <div class="reminder-stats">
+                        <div class="stat-card">
+                            <div class="label" data-translate="total_doses">總用藥次數</div>
+                            <div class="value" id="total-doses">0</div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="label" data-translate="completed">已完成</div>
+                            <div class="value" id="completed-doses">0</div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="label" data-translate="remaining">剩余次數</div>
+                            <div class="value" id="remaining-doses">0</div>
+                        </div>
+                    </div>
+                    
+                    <div class="dose-progress">
+                        <div class="progress-bar" id="dose-progress-bar"></div>
+                    </div>
+                    
+                    <div class="countdown-display">
+                        <h3 data-translate="next_dose_countdown">下次用藥倒計時</h3>
+                        <div class="countdown-timer" id="countdown-timer">04:00:00</div>
+                        <div class="next-dose-time"><span data-translate="estimated_time">預計時間</span>: <span id="next-dose-time">12:00:00</span></div>
+                    </div>
+                    
+                    <div class="dose-history">
+                        <h3><i class="fas fa-history"></i> <span data-translate="medication_history">用藥記錄</span></h3>
+                        <div class="history-items" id="history-items">
+                            <!-- 用药记录将动态添加到这里 -->
+                        </div>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button id="mark-taken" class="btn btn-success btn-lg">
+                            <i class="fas fa-check-circle"></i> <span data-translate="mark_as_taken">標記為已用藥</span>
+                        </button>
+                        <button id="restart-reminder" class="btn btn-info btn-lg" style="display:none">
+                            <i class="fas fa-redo-alt"></i> <span data-translate="restart_medication">重新繼續服藥</span>
+                        </button>
+                        <button id="reset-reminder" class="btn btn-warning btn-lg">
+                            <i class="fas fa-redo"></i> <span data-translate="reset_reminder">重置提醒</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="notification" id="reminder-notification">
+            <div class="notification-icon">
+                <i class="fas fa-bell"></i>
+            </div>
+            <div class="notification-content">
+                <h4 id="notification-title" data-translate="medication_time">用藥時間到！</h4>
+                <p id="notification-message" data-translate="take_medication_prompt">請及時服用您的藥物</p>
+                <div class="notification-actions">
+                    <button id="close-notification" class="btn btn-sm">
+                        <i class="fas fa-times"></i> <span data-translate="close">关闭</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tech-grid"></div>
+    </div>
+    <script src="medication-reminder.js"></script>
+</body>
+</html>

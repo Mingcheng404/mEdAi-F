@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedAI - 用戶資料</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="project.css">
+</head>
+<body>
+    <div class="app-container">
+        <nav class="navbar">
+            <div class="container navbar-content">
+                <a href="#" class="brand">
+                    <i class="fas fa-pills"></i> MedAI
+                </a>
+                <div>
+                    <div class="language-switcher">
+                        <button class="lang-btn active" data-lang="zh">中文</button>
+                        <button class="lang-btn" data-lang="en">EN</button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+</body>
+<body>
+    <div class="page-container">
+    
+        
+        <div class="page-logo">
+            <h1><i class="fas fa-user-circle"></i> 用戶資料</h1>
+            <p>幫助我們提供個性化建議</p>
+        </div>
+        
+        <div class="card">
+            <h2><i class="fas fa-user-edit"></i> 請提供您的個人資訊</h2>
+            
+            <form id="userInfoForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="age">年齡 <span class="required">*</span></label>
+                        <input type="number" id="age" name="age" min="12" max="120" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="gender">性別 <span class="required">*</span></label>
+                        <select id="gender" name="gender" required>
+                            <option value="">選擇您的性別</option>
+                            <option value="male">男性</option>
+                            <option value="female">女性</option>
+                            <option value="non-binary">其他</option>
+                            <option value="prefer-not-to-say">不願透露</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="allergies">食物過敏</label>
+                    <input type="text" id="allergies" name="allergies" placeholder="列出任何食物過敏（例如花生、貝類）">
+                    <p class="optional">（用逗號分隔，如無請留空）</p>
+                </div>
+                
+                <div class="form-group">
+                    <label for="conditions">已知健康狀況</label>
+                    <input type="text" id="conditions" name="conditions" placeholder="列出任何健康狀況（例如高血壓、糖尿病）">
+                    <p class="optional">（用逗號分隔，如無請留空）</p>
+                </div>
+                
+                <div class="form-group">
+                    <label for="medications">當前用藥</label>
+                    <input type="text" id="medications" name="medications" placeholder="列出當前用藥（例如二甲雙胍、賴諾普利）">
+                    <p class="optional">（用逗號分隔，如無請留空）</p>
+                </div>
+                
+                <button type="submit" class="btn">
+                    <i class="fas fa-robot"></i> 繼續使用AI助手
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script src="user-info.js"></script>
+</body>
+</html>

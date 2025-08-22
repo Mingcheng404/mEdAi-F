@@ -1,3 +1,4 @@
+<!-- app.html -->
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
@@ -43,8 +44,23 @@
                     <h2><i class="fas fa-robot"></i> 向我們的AI諮詢藥物信息</h2>
                 </div>
                 <div class="ai-body">
+                    <!-- 常見症狀快速選擇區 -->
+                    <div class="common-illnesses">
+                        <h3>常見症狀快速選擇</h3>
+                        <div class="illness-buttons">
+                            <button class="illness-btn" data-symptom="headache">頭痛</button>
+                            <button class="illness-btn" data-symptom="fever">發燒</button>
+                            <button class="illness-btn" data-symptom="cough">咳嗽</button>
+                            <button class="illness-btn" data-symptom="sore_throat">喉嚨痛</button>
+                            <button class="illness-btn" data-symptom="stomachache">胃痛</button>
+                            <button class="illness-btn" data-symptom="allergy">過敏</button>
+                            <button class="illness-btn" data-symptom="cold">感冒</button>
+                            <button class="illness-btn" data-symptom="flu">流感</button>
+                        </div>
+                    </div>
+                    
                     <div class="input-group">
-                        <input type="text" id="userInput" class="form-control" placeholder="描述您的症狀或諮詢藥物信息..." value="我有頭痛和發燒">
+                        <input type="text" id="userInput" class="form-control" placeholder="描述您的症狀或諮詢藥物信息...">
                         <button class="btn-primary" id="submitBtn">提交</button>
                     </div>
                     

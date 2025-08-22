@@ -1,3 +1,4 @@
+// app.js
 // 語言翻譯對照表
 const translations = {
     zh: {
@@ -23,7 +24,16 @@ const translations = {
             "提供副作用信息",
             "檢查藥物相互作用"
         ],
-        chatPrompt: "請描述您的症狀或詢問有關藥物的問題。"
+        chatPrompt: "請描述您的症狀或詢問有關藥物的問題。",
+        commonSymptoms: "常見症狀快速選擇",
+        headache: "頭痛",
+        fever: "發燒",
+        cough: "咳嗽",
+        sore_throat: "喉嚨痛",
+        stomachache: "胃痛",
+        allergy: "過敏",
+        cold: "感冒",
+        flu: "流感"
     },
     en: {
         title: "MedAI - AI Medication Assistant",
@@ -48,7 +58,40 @@ const translations = {
             "Side effect information",
             "Drug interaction checks"
         ],
-        chatPrompt: "Please describe your symptoms or ask a question about medications."
+        chatPrompt: "Please describe your symptoms or ask a question about medications.",
+        commonSymptoms: "Common Symptoms Quick Select",
+        headache: "Headache",
+        fever: "Fever",
+        cough: "Cough",
+        sore_throat: "Sore Throat",
+        stomachache: "Stomachache",
+        allergy: "Allergy",
+        cold: "Cold",
+        flu: "Flu"
+    }
+};
+
+// 症狀描述映射
+const symptomDescriptions = {
+    zh: {
+        headache: "我最近有頭痛，有時伴隨著對光或聲音敏感，什麼藥物可以幫助緩解？",
+        fever: "我發燒了，體溫大約38.5度，還有輕微的肌肉酸痛，應該服用什麼藥物？",
+        cough: "我有持續的咳嗽，特別是晚上更嚴重，有痰但不容易咳出，有什麼建議？",
+        sore_throat: "我的喉嚨很痛，吞嚥困難，喉嚨紅腫，有什麼藥物可以緩解？",
+        stomachache: "我胃部不舒服，有輕微的絞痛感，可能與飲食有關，該怎麼辦？",
+        allergy: "我有過敏症狀，打噴嚏、流鼻水、眼睛發癢，有什麼抗過敏藥推薦？",
+        cold: "我有感冒症狀，包括鼻塞、流鼻水、輕微喉嚨痛，需要什麼藥物？",
+        flu: "我有流感症狀，高燒、全身肌肉酸痛、極度疲勞，應該如何處理？"
+    },
+    en: {
+        headache: "I've been having headaches recently, sometimes with sensitivity to light or sound. What medication can help relieve this?",
+        fever: "I have a fever with a temperature of about 38.5°C, along with mild muscle aches. What medication should I take?",
+        cough: "I have a persistent cough, especially worse at night, with phlegm that's hard to expel. Any suggestions?",
+        sore_throat: "My throat is very sore, making it difficult to swallow, and it appears red and swollen. What medication can help?",
+        stomachache: "I have stomach discomfort with mild cramping, possibly related to diet. What should I do?",
+        allergy: "I'm experiencing allergy symptoms - sneezing, runny nose, itchy eyes. What antihistamine do you recommend?",
+        cold: "I have cold symptoms including nasal congestion, runny nose, and mild sore throat. What medication do I need?",
+        flu: "I have flu symptoms - high fever,muscle sches all over the body, extreme fatigue. How should I handle this?"
     }
 };
 
@@ -75,6 +118,7 @@ const appTitle = document.querySelector('.app-title h1');
 const appSubtitle = document.querySelector('.app-title p');
 const aiHeader = document.querySelector('.ai-header h2');
 const title = document.title;
+const illnessButtons = document.querySelectorAll('.illness-btn');
 
 // 初始化頁面翻譯
 function translatePage(lang) {
@@ -90,6 +134,13 @@ function translatePage(lang) {
     userInput.placeholder = langData.inputPlaceholder;
     submitBtn.textContent = langData.submitButton;
     newChatBtn.innerHTML = `<i class="fas fa-plus"></i> ${langData.newChatButton}`;
+    
+    // 更新常見症狀按鈕
+    document.querySelector('.common-illnesses h3').textContent = langData.commonSymptoms;
+    illnessButtons.forEach(btn => {
+        const symptom = btn.dataset.symptom;
+        btn.textContent = langData[symptom];
+    });
     
     // 更新活動語言按鈕
     langButtons.forEach(btn => {
@@ -218,8 +269,8 @@ function sendMessage(question) {
     const apiUrl = "https://api.probex.top/v1/chat/completions";
     const apiKey = "sk-AjyTBfmjHsUi5CprmHv4qRdRU6PC0UmsmG7z4HHWEHUkmP0n";
     
-    // 創建包含用戶資料的上下文
-    let context = `You are a helpful medical assistant specialized in providing medication recommendations. The user is a ${state.userProfile.age}-year-old ${state.userProfile.gender}.`;
+    // 創建包含用戶資料的上下文 - 更友好和關懷的語氣
+    let context = `You are a helpful, caring, and friendly medical assistant specialized in providing medication recommendations. Always show empathy and concern for the user's well-being. The user is a ${state.userProfile.age}-year-old ${state.userProfile.gender}.`;
     
     if (state.userProfile.allergies && state.userProfile.allergies !== '無') {
         context += ` The user has allergies to: ${state.userProfile.allergies}.`;
@@ -233,7 +284,16 @@ function sendMessage(question) {
         context += ` The user is currently taking: ${state.userProfile.medications}.`;
     }
     
-    context += " Provide detailed, accurate, and safe medication suggestions based on the user's symptoms. Always include important safety information and remind users to consult with healthcare professionals. Format your response in markdown.";
+    context += ` Provide detailed, accurate, and safe medication suggestions based on the user's symptoms. Always:
+    1. Express empathy and concern first
+    2. Provide clear, easy-to-understand explanations
+    3. Include important safety information and precautions
+    4. Suggest both over-the-counter and prescription options when appropriate
+    5. Remind users to consult with healthcare professionals for proper diagnosis
+    6. Offer general wellness advice alongside medication suggestions
+    7. Use a warm, caring, and supportive tone throughout
+    
+    Format your response in markdown, using headings, bullet points, and bold text for important information.`;
     
     // 準備包含聊天歷史的消息
     const messages = [
@@ -325,7 +385,7 @@ function sendMessage(question) {
         state.isProcessing = false;
         submitBtn.disabled = false;
         document.querySelector('.typing-indicator')?.remove();
-        addMessageToChat(`錯誤: ${error.message}`, 'ai');
+        addMessageToChat(`抱歉，我遇到了一些技術問題。請稍後再試或聯繫支持團隊。錯誤信息: ${error.message}`, 'ai');
     });
 }
 
@@ -398,6 +458,15 @@ newChatBtn.addEventListener('click', () => {
 langButtons.forEach(btn => {
     btn.addEventListener('click', () => {
         translatePage(btn.dataset.lang);
+    });
+});
+
+// 常見症狀按鈕點擊事件
+illnessButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const symptom = btn.dataset.symptom;
+        const lang = state.currentLanguage;
+        userInput.value = symptomDescriptions[lang][symptom];
     });
 });
 
